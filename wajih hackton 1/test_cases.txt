@@ -1,0 +1,81 @@
+SMART BUS RESERVATION SYSTEM - TEST CASES
+Run each scenario in a FRESH session unless stated otherwise.
+
+TC-01  View all routes
+  Input/action : Menu -> 1, answer n
+  Expected     : All five routes listed with seats and status.
+  Actual       :
+  Matched?     :
+
+TC-02  Search Hyderabad
+  Input/action : Menu -> 2 -> "Hyderabad"
+  Expected     : R101 (Karachi-Hyderabad), R103 (Hyderabad-Mirpur Khas),
+                 R105 (Sukkur-Hyderabad) listed.
+  Actual       :
+  Matched?     :
+
+TC-03  Unknown city
+  Input/action : Menu -> 2 -> "Atlantis"
+  Expected     : No routes matched "Atlantis". Menu returns.
+  Actual       :
+  Matched?     :
+
+TC-04  Book two seats
+  Input/action : Menu -> 3 -> Ahmed / 24 / R101 / 2
+  Expected     : Booking B1001 confirmed, total Rs.2,400,
+                 R101 available 38 of 40.
+  Actual       :
+  Matched?     :
+
+TC-05  Zero seats
+  Input/action : Menu -> 3 -> Ali / 30 / R101 / 0
+  Expected     : Rejected - seat quantity must be positive.
+                 No booking created, seats unchanged.
+  Actual       :
+  Matched?     :
+
+TC-06  Too many seats
+  Input/action : Menu -> 3 -> Ali / 30 / R105 / 999
+  Expected     : Rejected - only 30 seat(s) available.
+                 Availability never negative.
+  Actual       :
+  Matched?     :
+
+TC-07  Cancel confirmed booking
+  Input/action : TC-04, then Menu -> 5 -> B1001
+  Expected     : Status Cancelled, 2 seats restored,
+                 R101 available 40 of 40.
+  Actual       :
+  Matched?     :
+
+TC-08  Cancel same booking again
+  Input/action : Menu -> 5 -> B1001 (after TC-07)
+  Expected     : "already cancelled", no further seat restoration.
+  Actual       :
+  Matched?     :
+
+TC-09  Report with no bookings
+  Input/action : Fresh session, Menu -> 7
+  Expected     : 0 bookings, 0 confirmed, 0 cancelled, 0 seats,
+                 Rs.0 revenue, 0 fully booked routes.
+  Actual       :
+  Matched?     :
+
+TC-10  Book all remaining seats
+  Input/action : Menu -> 3 -> Sana / 22 / R105 / 30
+  Expected     : Confirmed, R105 shows 0 of 30, status Fully Booked.
+  Actual       :
+  Matched?     :
+
+TC-11  Report after cancellation
+  Input/action : Book, cancel, then Menu -> 7
+  Expected     : Cancelled count increases; cancelled fare excluded
+                 from confirmed revenue and reserved seats.
+  Actual       :
+  Matched?     :
+
+TC-12  Invalid menu option
+  Input/action : Menu -> "abc" and -> "42"
+  Expected     : Helpful error message, menu returns, no crash.
+  Actual       :
+  Matched?     :
